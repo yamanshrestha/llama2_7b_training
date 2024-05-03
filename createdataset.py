@@ -1,8 +1,8 @@
-
+import sys
 import pandas as pd
 
 # Load your dataset
-df = pd.read_csv('/home/cc/dataset/dataset_1k_0418.csv')
+df = pd.read_csv(sys.argv[1])
 
 def row_to_text(row):
     # Formatting each feature:value pair, with $ signs around the values
@@ -18,7 +18,7 @@ def row_to_text(row):
 df[['text']] = pd.DataFrame(df.apply(row_to_text, axis=1).tolist(), index=df.index) #,"output"
 
 # Specify the output file path (use a raw string or double backslashes to avoid escape sequence errors)
-output_path = r'/home/cc/dataset/dataset2train_1k_0418.csv'
+output_path = sys.argv[2]
 
 # Save the 'instruction' and 'output' columns to a new CSV file
 df[['text']].to_csv(output_path, index=False) #,"output"
